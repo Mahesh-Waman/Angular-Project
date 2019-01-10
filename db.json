@@ -1,0 +1,21 @@
+{
+  "userDetails": [
+    {
+      "id": 1,
+      "Name": "Mahesh Waman",
+      "userName": "MaheshW",
+      "emailId": "mahesh.waman@neosofttech.com",
+      "password": "12345678"
+    },
+    {
+      "id": 2
+    },
+    {
+      "Name": "mahesh",
+      "userName": "m",
+      "emailId": "m@gmail.com",
+      "password": "1234",
+      "id": 3
+    }
+  ]
+}
