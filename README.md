@@ -1,3 +1,18 @@
+## Introduction
+
+Project created using Angular 7 if you are using Angular-Cli version below 7 then update your angular-cli `npm install -g @angular/cli@latest`.
+
+## Installation
+
+1) firstly do `npm install` 
+2) before to run project, firstly start JSON-Server `json-server --watch db.json` after these start project `ng serve --open`
+3) to do testing use `ng test`
+
+## Runing JSON-Server
+
+To get more help on JSON-Server check out the [JSON-Server ReadME](https://github.com/typicode/json-server).
+
+
 # Login
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.1.4.
@@ -25,7 +40,5 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
-## Runing JSON-Server
 
-Run `json-server --watch db.json` to login user and make Registration of new user.
-To get more help on JSON-Server check out the [JSON-Server ReadME](https://github.com/typicode/json-server).
+
