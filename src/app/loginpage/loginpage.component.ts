@@ -17,9 +17,10 @@ export class LoginpageComponent implements OnInit {
   ngOnInit() {
   }
 
-  loginClick(){
+  loginClick(LoginName){
+    console.log("login Click");
     console.log(this.uName);
-    this._service.getProduct(this.uName).subscribe(response =>{
+    this._service.getProduct(LoginName).subscribe(response =>{
       debugger;
       console.log(response);
       // if(response.length==1){

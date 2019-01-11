@@ -1,5 +1,7 @@
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
+import { APP_BASE_HREF } from '@angular/common';
 import { Routes,RouterModule } from '@angular/router'
+import {RouterTestingModule} from '@angular/router/testing'
 import { LoginpageComponent } from './loginpage.component';
 import { FormsModule } from '@angular/forms'
 import { LoginServiceService } from '../login-service.service'
@@ -26,13 +28,14 @@ describe('LoginpageComponent', () => {
     TestBed.configureTestingModule({
       declarations: [LoginpageComponent,RegistrationComponent,HomeComponent],
       imports: [
-        // RouterTestingModule,
+        RouterTestingModule,
         FormsModule,
         // RouterModule,
         HttpClientModule,
         RouterModule.forRoot(routes)
       ],
-      providers: [LoginServiceService]
+      providers: [LoginServiceService,
+        {provide: APP_BASE_HREF, useValue: '/'}]
 
 
     })
@@ -41,9 +44,7 @@ describe('LoginpageComponent', () => {
     component = fixture.componentInstance;
     authservice = TestBed.get(LoginServiceService)
     // fixture.detectChanges();
-    SubmitEl = fixture.debugElement.query(By.css('button'));
-    UserEl = fixture.debugElement.query(By.css('input[type=text]'));
-    PasswordEl = fixture.debugElement.query(By.css('input[type=password]'));
+    
   }));
 
   // beforeEach(() => {
@@ -55,26 +56,38 @@ describe('LoginpageComponent', () => {
   //   PasswordEl = fixture.debugElement.query(By.css('input[type=password]'));
   // });
 
-  it('Entering email and password emits loggedIn event', () => {
+  it('Entering email and password emits loggedIn event',async( () => {
     let user;
+    SubmitEl = fixture.debugElement.query(By.css('button'));
+    UserEl = fixture.debugElement.query(By.css('input[name="username"]'));
+    PasswordEl = fixture.debugElement.query(By.css('input[type=password]'));
     spyOn(authservice, 'getProduct');
-    spyOn(component,'loginClick');
-    UserEl.nativeElement.value = "MaheshW";
+    const onClickMock = spyOn(component,'loginClick');
+    // UserEl.nativeElement.value = "MaheshW";
     PasswordEl.nativeElement.value = "12345678";
+    const userL=UserEl.nativeElement;
+    userL.value="MaheshW";
+    userL.dispatchEvent(new Event('input'));
+    // SubmitEl.triggerEventHandler('click',null);
+    // expect(onClickMock).toHaveBeenCalled();
+    console.log(userL.value)
+    component.loginClick(userL.value)
+    authservice.getProduct('MaheshW');
 
     // component.loginClick.subscribe((value) => user = value);
-    SubmitEl.nativeElement.click();
+    // SubmitEl.nativeElement.click();
     // expect(console.log).toHaveBeenCalledWith('Edit button has been clicked!')
-    // component.loginClick()
+
+  
     // expect(authservice.getProduct).toHaveBeenCalledWith('MaheshW');
     // SubmitEl.nativeElement.click()
     //  alert(d);
-    fixture.whenStable().then(() => {
-      expect(component.loginClick).toHaveBeenCalled();
-    authservice.getProduct('MaheshW');
+    // fixture.whenStable().then(() => {
+    //   expect(component.loginClick).toHaveBeenCalled();
+    // authservice.getProduct('MaheshW');
 
-    });
-  });
+    // });
+  }));
   // it('should create', () => {
   //   expect(component).toBeTruthy();
   // });

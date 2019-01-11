@@ -1,16 +1,19 @@
 import { TestBed, async } from '@angular/core/testing';
+import { APP_BASE_HREF } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
 import {Routes} from '@angular/router'
 import { AppComponent } from './app.component';
 import { LoginpageComponent } from './loginpage/loginpage.component';
-import {RegistrationComponent } from './registration/registration.component'
+import {RegistrationComponent } from './registration/registration.component';
+import {HomeComponent} from './home/home.component'
 import { RouterModule } from '@angular/router';
 import {FormsModule} from '@angular/forms'
 describe('AppComponent', () => {
   const routes: Routes = [
     {path:'',redirectTo:'login',pathMatch:'full'},
     {path:'login',component:LoginpageComponent},
-    {path:'aa',component:RegistrationComponent}
+    {path:'registration',component:RegistrationComponent},
+    {path:'Home',component:HomeComponent}
   ];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -22,8 +25,10 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         LoginpageComponent,
-        RegistrationComponent
+        RegistrationComponent,
+        HomeComponent
       ],
+      providers: [{provide: APP_BASE_HREF, useValue: '/'}]
     }).compileComponents();
   }));
 
